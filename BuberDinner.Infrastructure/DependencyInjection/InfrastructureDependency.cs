@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using BuberDinner.Application.Common.Interfaces.Authentication;
+using BuberDinner.Infrastructure.Authentication;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BuberDinner.Infrastructure.DependencyInjection
 {
@@ -6,6 +8,8 @@ namespace BuberDinner.Infrastructure.DependencyInjection
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddSingleton<IJwyTokenGenerator, JwtTokenGenerator>();
+
             return services;
         }
     }
