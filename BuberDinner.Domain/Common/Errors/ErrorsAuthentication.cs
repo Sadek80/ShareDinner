@@ -6,8 +6,11 @@ namespace BuberDinner.Domain.Common.Errors
     {
         public static class Authentication
         {
-            public static Error InvalidCredentials => Error.Validation("Authentication.InvalidCredentials", "Invalid Email or Password");
-            public static Error UnAuthorized => Error.Validation("Authentication.UnAuthorized", "UnAuthorized");
+            public const string InvalidCredentialsCode = "Authentication.InvalidCredentials.Code";
+            public const string InvalidCredentialsDescription = "Authentication.InvalidCredentials.Description";
+
+            public const string UnAuthorizedCode = "Authentication.UnAuthorized.Code";
+            public const string UnAuthorizedDescription = "Authentication.UnAuthorized.Description";
         }
     }
 }

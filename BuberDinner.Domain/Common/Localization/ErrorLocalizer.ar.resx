@@ -117,22 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Authorization.InvalidCredentials.Code" xml:space="preserve">
-    <value>Authentication.InvalidCredentials</value>
+  <data name="Authentication.InvalidCredentials.Code" xml:space="preserve">
+    <value>Authorization.InvalidCredentials</value>
   </data>
-  <data name="Authorization.InvalidCredentials.Description" xml:space="preserve">
-    <value>Invalid Email or Password</value>
+  <data name="Authentication.InvalidCredentials.Description" xml:space="preserve">
+    <value>البريد الالكتروني غير صحيح</value>
   </data>
-  <data name="Authorization.UnAuthorized.Code" xml:space="preserve">
-    <value>Authentication.UnAuthorized</value>
+  <data name="Authentication.UnAuthorized.Code" xml:space="preserve">
+    <value>Authorization.UnAuthorized</value>
   </data>
-  <data name="Authorization.UnAuthorized.Description" xml:space="preserve">
-    <value>UnAuthorized</value>
+  <data name="Authentication.UnAuthorized.Description" xml:space="preserve">
+    <value>غير مصرح لك</value>
   </data>
   <data name="User.DuplicateEmail.Code" xml:space="preserve">
     <value>User.DuplicateEmail</value>
   </data>
   <data name="User.DuplicateEmail.Description" xml:space="preserve">
-    <value>User is already exist</value>
+    <value>هذا البريد الالكتروني مستخدم</value>
   </data>
 </root>

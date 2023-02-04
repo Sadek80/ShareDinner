@@ -5,8 +5,9 @@ namespace BuberDinner.Domain.Common.Errors
     public static partial class Errors
     {
         public static class User
-        { 
-            public static Error DuplicateEmail => Error.Conflict("User.DuplicateEmail", "User is already exist");
+        {
+            public const string DuplicateEmailCode = "User.DuplicateEmail.Code";
+            public const string DuplicateEmailDescription = "User.DuplicateEmail.Description";
         }
     }
 }

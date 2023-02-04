@@ -5,6 +5,8 @@ using BuberDinner.Contracts.Authentication;
 using BuberDinner.Domain.Entities;
 using BuberDinner.Domain.Common.Errors;
 using ErrorOr;
+using Microsoft.Extensions.Localization;
+using BuberDinner.Domain.Common.Localization;
 
 namespace BuberDinner.Application.Services.Implementations.Authentication
 {
@@ -12,11 +14,14 @@ namespace BuberDinner.Application.Services.Implementations.Authentication
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
         private readonly IUserRepository _userRepository;
+        private readonly IStringLocalizer<ErrorLocalizer> _stringLocalizer;
 
-        public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
+        public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository,
+                                     IStringLocalizer<ErrorLocalizer> stringLocalizer)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
+            _stringLocalizer = stringLocalizer;
         }
 
         public ErrorOr<UserResponse> Login(LoginUserRequest request)
@@ -24,7 +29,17 @@ namespace BuberDinner.Application.Services.Implementations.Authentication
             var user = _userRepository.GetUserByEmail(request.Email);
 
             if (user is null || request.Password != user.Password)
-                return new[] { Errors.Authentication.InvalidCredentials, Errors.Authentication.UnAuthorized};
+            {
+                return new[] 
+                {
+                    Error.Validation(_stringLocalizer[Errors.Authentication.InvalidCredentialsCode],
+                                     _stringLocalizer[Errors.Authentication.InvalidCredentialsDescription]),
+
+                    Error.Validation(_stringLocalizer[Errors.Authentication.UnAuthorizedCode],
+                                     _stringLocalizer[Errors.Authentication.UnAuthorizedDescription])
+                };
+            }
+
 
             var userResponse = new UserResponse()
             {
@@ -41,7 +56,8 @@ namespace BuberDinner.Application.Services.Implementations.Authentication
         public ErrorOr<UserResponse> Register(RegisterUserRequest request)
         {
             if (_userRepository.GetUserByEmail(request.Email) is not null)
-                return Errors.User.DuplicateEmail;
+                return Error.Conflict(_stringLocalizer[Errors.User.DuplicateEmailCode], 
+                                      _stringLocalizer[Errors.User.DuplicateEmailDescription]);
 
             var user = new User()
             {

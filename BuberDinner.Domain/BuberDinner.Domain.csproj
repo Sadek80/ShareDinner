@@ -8,6 +8,13 @@
 
   <ItemGroup>
     <PackageReference Include="ErrorOr" Version="1.2.1" />
+    <PackageReference Include="Microsoft.Extensions.Localization.Abstractions" Version="6.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Common\Localization\ErrorLocalizer.ar.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>
