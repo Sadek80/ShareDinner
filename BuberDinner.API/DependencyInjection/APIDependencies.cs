@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BuberDinner.API.Error;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
@@ -43,6 +45,8 @@ namespace BuberDinner.API.DependencyInjection
                 // Advertise the API versions supported for the particular endpoint
                 config.ReportApiVersions = true;
             });
+
+            services.AddSingleton<ProblemDetailsFactory, CustomDefaultProblemDetailsFactory>();
 
             return services;
         }

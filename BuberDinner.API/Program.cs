@@ -10,6 +10,8 @@ builder.Services.AddAPIDependencies()
 
 var app = builder.Build();
 
+app.UseExceptionHandler("/error");
+
 // Configure the HTTP request pipeline.
 app.UseSwagger();
 app.UseSwaggerUI();
