@@ -6,8 +6,7 @@ namespace BuberDinner.API.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
-    [ApiController]
-    public class AuthController : ControllerBase
+    public class AuthController : ApiController
     {
         private readonly IAuthenticationService _authenticationService;
 
@@ -17,17 +16,26 @@ namespace BuberDinner.API.Controllers
         }
 
         [HttpPost("Register")]
-        public IActionResult Register(RegisterUserRequest request)
+        public async Task<IActionResult> Register(RegisterUserRequest request)
         {
             var response = _authenticationService.Register(request);
-            return Ok(response);
+
+            return response.Match(
+                                    success => Ok(response.Value),
+                                    errors => Problem(errors)
+                                 );
+
         }
 
         [HttpPost("Login")]
         public IActionResult Login(LoginUserRequest request)
         {
             var response = _authenticationService.Login(request);
-            return Ok(response);
+
+            return response.Match(
+                                    success => Ok(response.Value),
+                                    errors => Problem(errors)
+                                 );
         }
     }
 }

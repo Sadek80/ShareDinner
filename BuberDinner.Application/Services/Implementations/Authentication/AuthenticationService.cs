@@ -3,6 +3,8 @@ using BuberDinner.Application.Common.Interfaces.Repositories;
 using BuberDinner.Application.Services.Interfaces.Authentication;
 using BuberDinner.Contracts.Authentication;
 using BuberDinner.Domain.Entities;
+using BuberDinner.Domain.Common.Errors;
+using ErrorOr;
 
 namespace BuberDinner.Application.Services.Implementations.Authentication
 {
@@ -17,12 +19,12 @@ namespace BuberDinner.Application.Services.Implementations.Authentication
             _userRepository = userRepository;
         }
 
-        public UserResponse Login(LoginUserRequest request)
+        public ErrorOr<UserResponse> Login(LoginUserRequest request)
         {
             var user = _userRepository.GetUserByEmail(request.Email);
 
             if (user is null || request.Password != user.Password)
-                throw new Exception("Invalid Email or Password");
+                return new[] { Errors.Authentication.InvalidCredentials, Errors.Authentication.UnAuthorized};
 
             var userResponse = new UserResponse()
             {
@@ -36,10 +38,10 @@ namespace BuberDinner.Application.Services.Implementations.Authentication
             return userResponse;
         }
 
-        public UserResponse Register(RegisterUserRequest request)
+        public ErrorOr<UserResponse> Register(RegisterUserRequest request)
         {
             if (_userRepository.GetUserByEmail(request.Email) is not null)
-                throw new Exception("User is already exist");
+                return Errors.User.DuplicateEmail;
 
             var user = new User()
             {

@@ -1,10 +1,11 @@
 ﻿using BuberDinner.Contracts.Authentication;
+using ErrorOr;
 
 namespace BuberDinner.Application.Services.Interfaces.Authentication
 {
     public interface IAuthenticationService
     {
-        UserResponse Register(RegisterUserRequest request);
-        UserResponse Login(LoginUserRequest request);
+        ErrorOr<UserResponse> Register(RegisterUserRequest request);
+        ErrorOr<UserResponse> Login(LoginUserRequest request);
     }
 }
