@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.API", "BuberDinner.API\BuberDinner.API.csproj", "{3C232B33-0123-4581-9E04-D4FCBAF53284}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.API", "BuberDinner.API\BuberDinner.API.csproj", "{3C232B33-0123-4581-9E04-D4FCBAF53284}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Domain", "BuberDinner.Domain\BuberDinner.Domain.csproj", "{8EDAD65E-C043-4F5D-B329-9E495289F237}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Domain", "BuberDinner.Domain\BuberDinner.Domain.csproj", "{8EDAD65E-C043-4F5D-B329-9E495289F237}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Application", "BuberDinner.Application\BuberDinner.Application.csproj", "{1F1FBC37-566F-48D0-AB0D-76B75493AA65}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Application", "BuberDinner.Application\BuberDinner.Application.csproj", "{1F1FBC37-566F-48D0-AB0D-76B75493AA65}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Infrastructure", "BuberDinner.Infrastructure\BuberDinner.Infrastructure.csproj", "{EF8BBACA-8903-4ED4-8E97-3AE58AA1C4C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Infrastructure", "BuberDinner.Infrastructure\BuberDinner.Infrastructure.csproj", "{EF8BBACA-8903-4ED4-8E97-3AE58AA1C4C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Contracts", "BuberDinner.Contracts\BuberDinner.Contracts.csproj", "{A61190F3-B1DB-4FBE-B235-7F3B50119E07}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BuberDinner.Contracts", "BuberDinner.Contracts\BuberDinner.Contracts.csproj", "{A61190F3-B1DB-4FBE-B235-7F3B50119E07}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuberDinner.Persistence", "BuberDinner.Persistence\BuberDinner.Persistence.csproj", "{E2C2C2B7-DA5B-4A4D-B03A-A1ECF3DC2D34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{A61190F3-B1DB-4FBE-B235-7F3B50119E07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A61190F3-B1DB-4FBE-B235-7F3B50119E07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A61190F3-B1DB-4FBE-B235-7F3B50119E07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2C2C2B7-DA5B-4A4D-B03A-A1ECF3DC2D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2C2C2B7-DA5B-4A4D-B03A-A1ECF3DC2D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2C2C2B7-DA5B-4A4D-B03A-A1ECF3DC2D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2C2C2B7-DA5B-4A4D-B03A-A1ECF3DC2D34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

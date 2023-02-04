@@ -1,7 +1,7 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Repositories;
 using BuberDinner.Domain.Entities;
 
-namespace BuberDinner.Infrastructure.Persistance.Repositories
+namespace BuberDinner.Persistence.Persistance.Repositories
 {
     public class UserRepository : IUserRepository
     {
