@@ -1,9 +1,12 @@
 ﻿using BuberDinner.API.Common.Errors;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
+using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.OpenApi.Models;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
+using System.Globalization;
 using System.Reflection;
 
 namespace BuberDinner.API.DependencyInjection
@@ -47,6 +50,27 @@ namespace BuberDinner.API.DependencyInjection
             });
 
             services.AddSingleton<ProblemDetailsFactory, CustomDefaultProblemDetailsFactory>();
+
+            return services;
+        }
+
+        public static IServiceCollection AddAPILocalization(this IServiceCollection services)
+        {
+            services.AddLocalization();
+            services.AddMvc()
+                    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
+
+            services.Configure<RequestLocalizationOptions>(options =>
+            {
+                var supportedCultures = new[]
+                {
+                    new CultureInfo("en"),
+                    new CultureInfo("ar"),
+            };
+                options.DefaultRequestCulture = new RequestCulture(culture: "en", uiCulture: "en");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
 
             return services;
         }
