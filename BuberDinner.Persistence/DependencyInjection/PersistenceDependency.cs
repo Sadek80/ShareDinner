@@ -1,6 +1,4 @@
-﻿using BuberDinner.Application.Common.Interfaces.Authentication;
-using BuberDinner.Application.Common.Interfaces.Repositories;
-using BuberDinner.Application.Common.Interfaces.Services;
+﻿using BuberDinner.Application.Common.Interfaces.Repositories.Authentication;
 using BuberDinner.Persistence.Persistance.Repositories;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -10,7 +8,8 @@ namespace BuberDinner.Infrastructure.DependencyInjection
     {
         public static IServiceCollection AddPersistence(this IServiceCollection services)
         {
-            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IUserCommandRepo, UserCommandRepo>();
+            services.AddTransient<IUserQueryRepo, UserQueryRepo>();
 
             return services;
         }

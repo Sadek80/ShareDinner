@@ -1,5 +1,4 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Authentication;
-using BuberDinner.Application.Common.Interfaces.Repositories;
 using BuberDinner.Contracts.Authentication;
 using BuberDinner.Domain.Common.Localization;
 using ErrorOr;
@@ -7,26 +6,31 @@ using Mediator;
 using Microsoft.Extensions.Localization;
 using BuberDinner.Domain.Common.Errors;
 using BuberDinner.Domain.Entities;
+using BuberDinner.Application.Common.Interfaces.Repositories.Authentication;
 
 namespace BuberDinner.Application.Services.Authentication.Commands.Register
 {
     public class RegisterCommandHandler : IRequestHandler<RegisterCommand, ErrorOr<UserResponse>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserQueryRepo _userQueryRepo;
+        private readonly IUserCommandRepo _userCommandRepository;
         private readonly IStringLocalizer<ErrorLocalizer> _stringLocalizer;
 
-        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository,
-                                     IStringLocalizer<ErrorLocalizer> stringLocalizer)
+        public RegisterCommandHandler(IJwtTokenGenerator jwtTokenGenerator,
+                                      IUserQueryRepo userQueryRepo,
+                                      IUserCommandRepo userCommandRepository,
+                                      IStringLocalizer<ErrorLocalizer> stringLocalizer)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
-            _userRepository = userRepository;
+            _userQueryRepo = userQueryRepo;
+            _userCommandRepository = userCommandRepository;
             _stringLocalizer = stringLocalizer;
         }
 
         public async ValueTask<ErrorOr<UserResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
-            if (_userRepository.GetUserByEmail(request.Email) is not null)
+            if (_userQueryRepo.GetUserByEmail(request.Email) is not null)
                 return Error.Conflict(_stringLocalizer[Errors.User.DuplicateEmailCode],
                                       _stringLocalizer[Errors.User.DuplicateEmailDescription]);
 
@@ -38,7 +42,7 @@ namespace BuberDinner.Application.Services.Authentication.Commands.Register
                 Password = request.Password,
             };
 
-            _userRepository.AddUser(user);
+            _userCommandRepository.AddUser(user);
 
             var userResponse = new UserResponse()
             {
@@ -48,6 +52,7 @@ namespace BuberDinner.Application.Services.Authentication.Commands.Register
                 LastName = user.LastName,
                 Token = _jwtTokenGenerator.GenerateToken(user)
             };
+
 
             return userResponse;
         }

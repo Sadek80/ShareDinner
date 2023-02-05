@@ -1,22 +1,23 @@
 ﻿using BuberDinner.Application.Common.Interfaces.Authentication;
-using BuberDinner.Application.Common.Interfaces.Repositories;
 using BuberDinner.Contracts.Authentication;
 using BuberDinner.Domain.Common.Localization;
 using ErrorOr;
 using Mediator;
 using Microsoft.Extensions.Localization;
 using BuberDinner.Domain.Common.Errors;
+using BuberDinner.Application.Common.Interfaces.Repositories.Authentication;
 
 namespace BuberDinner.Application.Services.Authentication.Queries.Login
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, ErrorOr<UserResponse>>
     {
         private readonly IJwtTokenGenerator _jwtTokenGenerator;
-        private readonly IUserRepository _userRepository;
+        private readonly IUserQueryRepo _userRepository;
         private readonly IStringLocalizer<ErrorLocalizer> _stringLocalizer;
 
-        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository,
-                                     IStringLocalizer<ErrorLocalizer> stringLocalizer)
+        public LoginQueryHandler(IJwtTokenGenerator jwtTokenGenerator, 
+                                 IUserQueryRepo userRepository,
+                                 IStringLocalizer<ErrorLocalizer> stringLocalizer)
         {
             _jwtTokenGenerator = jwtTokenGenerator;
             _userRepository = userRepository;
