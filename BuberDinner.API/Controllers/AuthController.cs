@@ -1,5 +1,7 @@
-﻿using BuberDinner.Application.Services.Interfaces.Authentication;
+﻿using BuberDinner.Application.Services.Authentication.Commands.Register;
+using BuberDinner.Application.Services.Authentication.Queries.Login;
 using BuberDinner.Contracts.Authentication;
+using Mediator;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberDinner.API.Controllers
@@ -8,17 +10,25 @@ namespace BuberDinner.API.Controllers
     [ApiVersion("1.0")]
     public class AuthController : ApiController
     {
-        private readonly IAuthenticationService _authenticationService;
+        private readonly ISender _sender;
 
-        public AuthController(IAuthenticationService authenticationService)
+        public AuthController(ISender sender)
         {
-            _authenticationService = authenticationService;
+            _sender = sender;
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterUserRequest request)
+        public async Task<IActionResult> Register(RegisterUserRequest request, CancellationToken cancellationToken)
         {
-            var response = _authenticationService.Register(request);
+            var registerCommand = new RegisterCommand()
+            {
+                Email = request.Email,
+                FirstName = request.FirstName,
+                LastName = request.LastName,
+                Password = request.Password,
+            };
+
+            var response = await _sender.Send(registerCommand, cancellationToken);
 
             return response.Match(
                                     success => Ok(response.Value),
@@ -28,9 +38,15 @@ namespace BuberDinner.API.Controllers
         }
 
         [HttpPost("Login")]
-        public IActionResult Login(LoginUserRequest request)
+        public async Task<IActionResult> Login(LoginUserRequest request, CancellationToken cancellationToken)
         {
-            var response = _authenticationService.Login(request);
+            var loginQuery = new LoginQuery()
+            {
+                Email = request.Email,
+                Password = request.Password
+            };
+
+            var response = await _sender.Send(loginQuery, cancellationToken);
 
             return response.Match(
                                     success => Ok(response.Value),
