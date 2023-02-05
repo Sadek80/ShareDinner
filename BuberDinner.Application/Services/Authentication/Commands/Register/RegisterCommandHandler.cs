@@ -30,6 +30,8 @@ namespace BuberDinner.Application.Services.Authentication.Commands.Register
 
         public async ValueTask<ErrorOr<UserResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
+
             if (_userQueryRepo.GetUserByEmail(request.Email) is not null)
                 return Error.Conflict(_stringLocalizer[Errors.UserErrors.DuplicateEmailCode],
                                       _stringLocalizer[Errors.UserErrors.DuplicateEmailDescription]);

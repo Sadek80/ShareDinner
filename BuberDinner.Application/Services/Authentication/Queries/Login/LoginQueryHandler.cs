@@ -26,6 +26,8 @@ namespace BuberDinner.Application.Services.Authentication.Queries.Login
 
         public async ValueTask<ErrorOr<UserResponse>> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
+            await Task.CompletedTask;
+
             var user = _userRepository.GetUserByEmail(request.Email);
 
             if (user is null || request.Password != user.Password)
