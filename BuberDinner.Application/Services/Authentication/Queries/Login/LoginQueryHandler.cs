@@ -4,7 +4,7 @@ using BuberDinner.Domain.Common.Localization;
 using ErrorOr;
 using Mediator;
 using Microsoft.Extensions.Localization;
-using BuberDinner.Domain.Common.Errors;
+using BuberDinner.Domain.Common.SystemErrors;
 using BuberDinner.Application.Common.Interfaces.Repositories.Authentication;
 
 namespace BuberDinner.Application.Services.Authentication.Queries.Login
@@ -32,11 +32,11 @@ namespace BuberDinner.Application.Services.Authentication.Queries.Login
             {
                 return new[]
                 {
-                    Error.Validation(_stringLocalizer[Errors.Authentication.InvalidCredentialsCode],
-                                     _stringLocalizer[Errors.Authentication.InvalidCredentialsDescription]),
+                    Error.Validation(_stringLocalizer[Errors.AuthenticationErrors.InvalidCredentialsCode],
+                                     _stringLocalizer[Errors.AuthenticationErrors.InvalidCredentialsDescription]),
 
-                    Error.Validation(_stringLocalizer[Errors.Authentication.UnAuthorizedCode],
-                                     _stringLocalizer[Errors.Authentication.UnAuthorizedDescription])
+                    Error.Validation(_stringLocalizer[Errors.AuthenticationErrors.UnAuthorizedCode],
+                                     _stringLocalizer[Errors.AuthenticationErrors.UnAuthorizedDescription])
                 };
             }
 

@@ -4,7 +4,7 @@ using BuberDinner.Domain.Common.Localization;
 using ErrorOr;
 using Mediator;
 using Microsoft.Extensions.Localization;
-using BuberDinner.Domain.Common.Errors;
+using BuberDinner.Domain.Common.SystemErrors;
 using BuberDinner.Domain.Entities;
 using BuberDinner.Application.Common.Interfaces.Repositories.Authentication;
 
@@ -31,8 +31,8 @@ namespace BuberDinner.Application.Services.Authentication.Commands.Register
         public async ValueTask<ErrorOr<UserResponse>> Handle(RegisterCommand request, CancellationToken cancellationToken)
         {
             if (_userQueryRepo.GetUserByEmail(request.Email) is not null)
-                return Error.Conflict(_stringLocalizer[Errors.User.DuplicateEmailCode],
-                                      _stringLocalizer[Errors.User.DuplicateEmailDescription]);
+                return Error.Conflict(_stringLocalizer[Errors.UserErrors.DuplicateEmailCode],
+                                      _stringLocalizer[Errors.UserErrors.DuplicateEmailDescription]);
 
             var user = new User()
             {

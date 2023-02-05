@@ -10,7 +10,8 @@ builder.Services.AddAPIDependencies()
                 .AddAPILocalization()
                 .AddApplication()
                 .AddInfrastructure(builder.Configuration)
-                .AddPersistence();
+                .AddPersistence()
+                .AddMappings();
 
 var app = builder.Build();
 
