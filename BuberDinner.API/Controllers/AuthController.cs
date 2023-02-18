@@ -3,12 +3,14 @@ using BuberDinner.Application.Services.Authentication.Queries.Login;
 using BuberDinner.Contracts.Authentication;
 using MapsterMapper;
 using Mediator;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BuberDinner.API.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
     [ApiVersion("1.0")]
+    [AllowAnonymous]
     public class AuthController : ApiController
     {
         private readonly ISender _sender;
@@ -21,7 +23,7 @@ namespace BuberDinner.API.Controllers
         }
 
         [HttpPost("Register")]
-        public async Task<IActionResult> Register(RegisterUserRequest request, CancellationToken cancellationToken)
+        public async ValueTask<IActionResult> Register(RegisterUserRequest request, CancellationToken cancellationToken)
         {
             var registerCommand = _mapper.Map<RegisterCommand>(request);
 
@@ -33,7 +35,7 @@ namespace BuberDinner.API.Controllers
         }
 
         [HttpPost("Login")]
-        public async Task<IActionResult> Login(LoginUserRequest request, CancellationToken cancellationToken)
+        public async ValueTask<IActionResult> Login(LoginUserRequest request, CancellationToken cancellationToken)
         {
             var loginQuery = _mapper.Map<LoginQuery>(request);
                 
