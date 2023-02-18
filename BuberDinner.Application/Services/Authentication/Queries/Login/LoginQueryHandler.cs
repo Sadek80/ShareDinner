@@ -34,10 +34,10 @@ namespace BuberDinner.Application.Services.Authentication.Queries.Login
             {
                 return new[]
                 {
-                    Error.Validation(_stringLocalizer[Errors.AuthenticationErrors.InvalidCredentialsCode],
+                    Error.Custom(CustomErrorTypes.UnAuthorized, _stringLocalizer[Errors.AuthenticationErrors.InvalidCredentialsCode],
                                      _stringLocalizer[Errors.AuthenticationErrors.InvalidCredentialsDescription]),
 
-                    Error.Validation(_stringLocalizer[Errors.AuthenticationErrors.UnAuthorizedCode],
+                    Error.Custom(CustomErrorTypes.UnAuthorized, _stringLocalizer[Errors.AuthenticationErrors.UnAuthorizedCode],
                                      _stringLocalizer[Errors.AuthenticationErrors.UnAuthorizedDescription])
                 };
             }

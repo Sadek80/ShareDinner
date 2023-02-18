@@ -18,7 +18,8 @@ namespace BuberDinner.Application.DependencyInjection
             services.AddSingleton(typeof(IPipelineBehavior<,>),
                                   typeof(ValidationPipelineBehavior<,>));
 
-            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly(), 
+                                               ServiceLifetime.Singleton);
 
             return services;
         }
